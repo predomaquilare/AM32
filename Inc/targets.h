@@ -19,6 +19,7 @@
 // #define BLPWR
 // #define HVFLYCOLOR
 // #define AM32REF_F051
+// #define IRISBOARD_F103 //---------------------------------------------------
 
 // #define G072ESC
 // #define G071ENABLE
@@ -1003,6 +1004,21 @@
 #define VOLTAGE_ADC_CHANNEL LL_ADC_CHANNEL_7
 #endif
 
+#ifdef IRISBOARD_F103
+#define FILE_NAME "IRISBOARD_F103"
+#define FIRMWARE_NAME "IRIS BOARD"
+#define DEAD_TIME 60
+#define HARDWARE_GROUP_F103
+#define TARGET_STALL_PROTECTION_INTERVAL 8000
+#define MILLIVOLT_PER_AMP 60
+#define USE_SERIAL_TELEMETRY
+#define CURRENT_SENSE_ADC_PIN LL_GPIO_PIN_3
+#define VOLTAGE_SENSE_ADC_PIN LL_GPIO_PIN_2
+
+#define CURRENT_ADC_CHANNEL LL_ADC_CHANNEL_5
+#define VOLTAGE_ADC_CHANNEL LL_ADC_CHANNEL_7
+#endif
+
 /********************************** defaults if not set
  * ***************************/
 
@@ -1040,6 +1056,40 @@
 
 /************************************ F051 Hardware Groups
  * ****************************/
+
+#ifdef HARDWARE_GROUP_F103
+
+#define MCU_F103
+#define USE_TIMER_15_CHANNEL_1
+#define INPUT_PIN LL_GPIO_PIN_2
+#define INPUT_PIN_PORT GPIOA
+#define IC_TIMER_CHANNEL LL_TIM_CHANNEL_CH1
+#define IC_TIMER_REGISTER TIM15
+#define IC_TIMER_POINTER htim15
+#define INPUT_DMA_CHANNEL LL_DMA_CHANNEL_5
+#define DMA_HANDLE_TYPE_DEF hdma_tim15_ch1
+#define IC_DMA_IRQ_NAME DMA1_Channel4_5_IRQn
+
+#define PHASE_A_GPIO_LOW LL_GPIO_PIN_1
+#define PHASE_A_GPIO_PORT_LOW GPIOB
+#define PHASE_A_GPIO_HIGH LL_GPIO_PIN_10
+#define PHASE_A_GPIO_PORT_HIGH GPIOA
+
+#define PHASE_B_GPIO_LOW LL_GPIO_PIN_0
+#define PHASE_B_GPIO_PORT_LOW GPIOB
+#define PHASE_B_GPIO_HIGH LL_GPIO_PIN_9
+#define PHASE_B_GPIO_PORT_HIGH GPIOA
+
+#define PHASE_C_GPIO_LOW LL_GPIO_PIN_7
+#define PHASE_C_GPIO_PORT_LOW GPIOA
+#define PHASE_C_GPIO_HIGH LL_GPIO_PIN_8
+#define PHASE_C_GPIO_PORT_HIGH GPIOA
+
+#define PHASE_A_COMP COMP_PA5
+#define PHASE_B_COMP COMP_PA4
+#define PHASE_C_COMP COMP_PA0
+
+#endif
 
 #ifdef HARDWARE_GROUP_F0_A
 
@@ -1312,12 +1362,12 @@
 
 #endif
 
-#ifdef HARDWARE_GROUP_F0_045 // tried B
+#ifdef HARDWARE_GROUP_F0_045  // tried B
 #define PHASE_A_COMP COMP_PA0 // pa0     // works for polling mode
 #define PHASE_B_COMP COMP_PA4 // pa4
 #define PHASE_C_COMP COMP_PA5 // pa5
 #endif
-#ifdef HARDWARE_GROUP_F0_504 // tried F
+#ifdef HARDWARE_GROUP_F0_504  // tried F
 #define PHASE_A_COMP COMP_PA5 // pa5            // works for polling mode
 #define PHASE_B_COMP COMP_PA0 // pa0
 #define PHASE_C_COMP COMP_PA4 // pa4
@@ -1337,7 +1387,7 @@
 #define PHASE_B_COMP COMP_PA0 // pa0
 #define PHASE_C_COMP COMP_PA5 // pa5
 #endif
-#ifdef HARDWARE_GROUP_F0_540 // tried H
+#ifdef HARDWARE_GROUP_F0_540  // tried H
 #define PHASE_A_COMP COMP_PA5 // pa5           // works for polling mode
 #define PHASE_B_COMP COMP_PA4 // pa4
 #define PHASE_C_COMP COMP_PA0 // pa0
@@ -1711,7 +1761,6 @@
 #define CURRENT_ADC_CHANNEL LL_ADC_CHANNEL_5
 
 #endif
-
 
 #ifdef HARDWARE_GROUP_G0_J
 
@@ -2101,9 +2150,9 @@
 // #define PHASE_B_COMP COMP_INMInput_IN1  // pa4
 // #define PHASE_C_COMP COMP_INMInput_IN2  // pa5
 
-//#define PHASE_A_COMP 0x400000E1 // works for polling mode
-//#define PHASE_B_COMP 0x400000C1
-//#define PHASE_C_COMP 0x400000D1
+// #define PHASE_A_COMP 0x400000E1 // works for polling mode
+// #define PHASE_B_COMP 0x400000C1
+// #define PHASE_C_COMP 0x400000D1
 
 #endif
 
